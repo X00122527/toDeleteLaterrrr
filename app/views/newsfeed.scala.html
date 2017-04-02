@@ -1,0 +1,61 @@
+@import helper._
+@(newPostForm: Form[models.Post], addCommentForm: Form[models.Comment], posts: List[models.Post], comments: List[models.Comment], user: models.users.User, post: models.Post)
+@main("Newsfeed", user) {
+
+
+    <div class="well">
+        <div class="row">
+            <div class="col-sm-6 col-centered">
+            @form(action = routes.HomeController.addPostSubmit(), 'class -> "form-horizontal", 'role -> "form") {
+                @inputText(newPostForm("content"), '_label -> "What's on your mind? #facebook xD", 'class -> "form-control")
+
+
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-open"></span></button>
+                <input type="submit" value="Add post" class="btn btn-primary" style="float: right">
+
+                    <!--  <button type="button" class="btn" style="float: right">ADD POST</button>-->
+            </div>
+
+        </div>
+        }
+        <br>
+        <div class="row">
+
+        @for(p <- posts) {
+            <div class="col-sm-6 col-centered" style="border: 1px solid grey;">
+                <div class="row">
+                    <div>
+                        <p><strong>@p.getUser.getName</strong> posted<span style="float: right;">27/07/1995</span></p>
+                        <p>@p.getContent
+
+                        </p>
+                    </div>
+
+                </div>
+
+                    <!-- koniec rowa-->
+                <div class="row">
+                    <div>
+                        <button action"@post.giveLike()" type="button" class="btn btn-default btn-lg">
+                            <span class="glyphicon glyphicon-thumbs-up" ></span></button>
+                            <p id="likes"> @post.getLikes()</p>
+                            @form(action = routes.HomeController.addCommentSubmit(), 'class -> "form-horizontal", 'role -> "form") {
+                            @inputText(addCommentForm("content"), '_label -> "comment some shit", 'class -> "form-control")
+
+                        <input type="submit" value="Add comment" class="btn btn-primary" style="float: right">
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            }
+
+
+        </div>
+    </div>
+
+
+}

@@ -1,0 +1,31 @@
+@(mealForm: Form[models.Meal], member: models.users.Member, user: models.users.User, meals: List[models.Meal])
+@import helper._
+
+
+@main("Meals", user) {
+sadasd
+
+    @form(action = routes.HomeController.addMealSubmit(), 'class -> "form-horizontal", 'role -> "form") {
+                <button type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-open"></span></button>
+                <input type="submit" value="generate!" class="btn btn-primary" style="float: right">
+
+                    <!--  <button type="button" class="btn" style="float: right">ADD POST</button>-->
+            </div>
+
+        </div>
+        }
+qwe
+    <h1>dziennie zapasdasdotrzebowanie : @member.getDaily_kcal()</h1>
+    <h1>kcal per meal: @member.getMealCalories</h1>
+   @for(m <- meals) {
+        <div id="meal">
+
+            <h2> Meal @m.getMealId()</h2>
+            <p>  Total KCAL @m.getTotalKcal()</p>
+
+
+        </div>
+   }
+
+}
